@@ -1,0 +1,6 @@
+gitpush.ps1
+qtclean.ps1
+compile_commands.json
+*Debug/
+*Release/
+.cache/
