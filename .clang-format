@@ -1,4 +1,7 @@
 ---
 BasedOnStyle: Microsoft
 Language: Cpp
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterControlStatement: Never
 ...

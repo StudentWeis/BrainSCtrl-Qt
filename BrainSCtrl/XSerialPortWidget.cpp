@@ -30,13 +30,11 @@ bool HexSend = 0;
 void XSerialPortWidget::on_HexSend_Ck_clicked()
 {
     HexSend = 1 - HexSend;
-    if(HexSend)
-    {
+    if (HexSend) {
         ui->Sent_Ed->setInputMask("HHHHHHHHHHHHHHHH");
         ui->Sent_Ed_2->setInputMask("HHHHHHHHHHHHHHHH");
     }
-    else
-    {
+    else {
         ui->Sent_Ed->clearMask();
         ui->Sent_Ed_2->clearMask();
     }
@@ -54,32 +52,30 @@ void XSerialPortWidget::on_NLineSend_Ck_clicked()
  */
 void XSerialPortWidget::on_Send_Bt_clicked()
 {
-    if (HexSend) // 十六进制发送
-    {
+    // 十六进制发送
+    if (HexSend) {
         ASCIItoHex(ui->Sent_Ed->text().toLocal8Bit().data());
     }
-    else // 字符发送
-    {
+    // 字符发送
+    else {
         serialPort->write(ui->Sent_Ed->text().toLocal8Bit().data());
     }
-    if (NewLine)
-    {
+    if (NewLine) {
         const char *newLineChar = "\r\n";
         serialPort->write(newLineChar, 2);
     }
 }
 void XSerialPortWidget::on_Send_Bt_2_clicked()
 {
-    if (HexSend) // 十六进制发送
-    {
+    // 十六进制发送
+    if (HexSend) {
         ASCIItoHex(ui->Sent_Ed_2->text().toLocal8Bit().data());
     }
-    else // 字符发送
-    {
+    // 字符发送
+    else {
         serialPort->write(ui->Sent_Ed_2->text().toLocal8Bit().data());
     }
-    if (NewLine)
-    {
+    if (NewLine) {
         const char *newLineChar = "\r\n";
         serialPort->write(newLineChar, 2);
     }
@@ -88,18 +84,17 @@ void XSerialPortWidget::on_Send_Bt_2_clicked()
  * @brief ASCII 转十六进制
  * @param dataASCII
  */
-void XSerialPortWidget::ASCIItoHex(char * dataASCII)
+void XSerialPortWidget::ASCIItoHex(char *dataASCII)
 {
     int dataNumber = strlen(dataASCII);
-    if (dataNumber%2 || dataNumber == 0)
-    {
+    if (dataNumber % 2 || dataNumber == 0) {
         QMessageBox::information(this, "提示", "十六进制没输够");
         return;
     }
-    char dataHex[dataNumber/2];
-    for (int i = 0; i < dataNumber/2; i++) {
+    char dataHex[dataNumber / 2];
+    for (int i = 0; i < dataNumber / 2; i++) {
         dataHex[i] = 0;
-        sscanf(&dataASCII[2*i], "%x", &dataHex[i]);
+        sscanf(&dataASCII[2 * i], "%x", &dataHex[i]);
     }
     serialPort->write(dataHex);
 }
@@ -131,19 +126,28 @@ void XSerialPortWidget::on_HexDisplay_Ck_clicked()
  */
 void XSerialPortWidget::serialPortReadReady()
 {
-    QString buf = QString(serialPort->readAll());
+    QByteArray readByteBuf = serialPort->readAll();
+    QString readStringBuf = QString(readByteBuf);
+
+    // Display.
     if (HexDisplay) {
-        char bufbuf[100];
-        emit serial_Recive(buf[0].toLatin1());
-        for (int i = 0; i < (int)strlen(buf.toLocal8Bit().data()); i++) {
-            sprintf(bufbuf, "%x", buf.toLocal8Bit().data()[i]);
-            ui->Receieve_Ed->insertPlainText(bufbuf);           
+        char hexBuf[1000];
+        for (int i = 0; i < (int)strlen(readByteBuf.data()); i++) {
+            sprintf(hexBuf, "%x", readByteBuf.data()[i]);
+            ui->Receieve_Ed->insertPlainText(hexBuf);
         }
     }
     else {
-        ui->Receieve_Ed->insertPlainText(buf);
-        emit serial_Recive(buf.toDouble());
+        ui->Receieve_Ed->insertPlainText(readStringBuf);
     }
+
+    float *floatBuf;
+    uint8_t buf8[4];
+    for (int i = 0; i < 4; ++i) {
+        buf8[i] = readByteBuf.data()[i];
+    }
+    floatBuf = (float *)buf8;
+    emit serial_Recive(-(*floatBuf));
 }
 /**
  * @brief 清空接受区
@@ -155,7 +159,6 @@ void XSerialPortWidget::on_ClearRec_Bt_clicked()
 // 接收数据
 //===========================================================
 
-
 //===========================================================
 // 串口配置
 
@@ -164,13 +167,12 @@ void XSerialPortWidget::on_ClearRec_Bt_clicked()
  */
 void XSerialPortWidget::on_OpenClose_Bt_clicked()
 {
-    if (!opened)
-    {
+    if (!opened) {
         // 设置串口号、数据位、停止位
         QSerialPort::DataBits myDataBits;
         QSerialPort::StopBits myStopBits;
         int myBaudRate;
-        sscanf(ui->Baud_Cb->currentText().toLatin1(),"%d",&myBaudRate); // 转换波特率字符串为整型数字
+        sscanf(ui->Baud_Cb->currentText().toLatin1(), "%d", &myBaudRate); // 转换波特率字符串为整型数字
         switch (ui->Date_Cb->currentIndex()) {
         case 0:
             myDataBits = QSerialPort::Data8;
@@ -196,18 +198,15 @@ void XSerialPortWidget::on_OpenClose_Bt_clicked()
         serialPort->setStopBits(myStopBits);
 
         // 开启串口
-        if (serialPort->open(QIODevice::ReadWrite))
-        {
+        if (serialPort->open(QIODevice::ReadWrite)) {
             ui->OpenClose_Bt->setText("关闭串口");
             opened = true;
         }
-        else
-        {
+        else {
             QMessageBox::information(this, "提示", "打开串口失败");
         }
     }
-    else
-    {
+    else {
         serialPort->close();
         ui->OpenClose_Bt->setText("打开串口");
         opened = false;
@@ -226,7 +225,6 @@ void XSerialPortWidget::onNewPortList(QStringList portName)
 
 // 串口配置
 //===========================================================
-
 
 void XSerialPortWidget::on_Help_Bt_clicked()
 {
