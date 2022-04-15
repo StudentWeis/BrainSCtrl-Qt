@@ -19,6 +19,14 @@ class NeuConfigWidget : public QWidget
     NeuConfigWidget(QWidget *parent = nullptr);
     ~NeuConfigWidget();
 
+    struct {
+        float capacitanceLIF;
+        int resitanceLIF;
+        char NeuCountLIF;
+    } LIF = { 0.2, 100, 10 };
+
+    uint8_t * LIF8;
+
 
 private slots:
     void on_NeuCount_SL_valueChanged(int value);

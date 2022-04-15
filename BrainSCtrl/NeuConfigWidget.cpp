@@ -8,6 +8,11 @@ NeuConfigWidget::NeuConfigWidget(QWidget *parent) : QWidget(parent), ui(new Ui::
 {
     ui->setupUi(this);
 
+
+    LIF8 = (uint8_t *)&LIF;
+    for (int i = 0; i < 9; ++i){
+        printf("%x ", LIF8[i]);
+    }
 }
 
 NeuConfigWidget::~NeuConfigWidget()

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>999</width>
-    <height>563</height>
+    <width>742</width>
+    <height>749</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,45 +22,39 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="2">
+    <item row="0" column="1">
      <widget class="QPushButton" name="Clear_Bt">
       <property name="text">
        <string>清空图像</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="3" rowspan="3">
-     <widget class="NeuConfigWidget" name="widget_2" native="true">
-      <property name="minimumSize">
-       <size>
-        <width>350</width>
-        <height>500</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="3">
+    <item row="1" column="0" colspan="2">
      <widget class="NeuChartWidget" name="widget" native="true">
       <property name="minimumSize">
        <size>
-        <width>625</width>
+        <width>710</width>
         <height>240</height>
        </size>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <spacer name="verticalSpacer">
+    <item row="2" column="0" colspan="2">
+     <widget class="Line" name="line">
       <property name="orientation">
-       <enum>Qt::Vertical</enum>
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="sizeHint" stdset="0">
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="NeuConfigWidget" name="widget_2" native="true">
+      <property name="minimumSize">
        <size>
-        <width>20</width>
-        <height>222</height>
+        <width>710</width>
+        <height>350</height>
        </size>
       </property>
-     </spacer>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -69,8 +63,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>999</width>
-     <height>21</height>
+     <width>742</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>500</height>
+    <width>710</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>350</width>
-    <height>500</height>
+    <width>710</width>
+    <height>350</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -56,6 +56,16 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="0" column="1" rowspan="10">
+    <widget class="NeuPaint" name="NeuWidget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>330</width>
+       <height>330</height>
+      </size>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -203,14 +213,109 @@
     </layout>
    </item>
    <item row="5" column="0">
-    <widget class="NeuPaint" name="NeuWidget" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>330</width>
-       <height>330</height>
-      </size>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="R_LB">
+       <property name="text">
+        <string>电阻</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="R_SL">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="R_SB"/>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="C_LB">
+       <property name="text">
+        <string>电容</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="C_SL">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="C_SB"/>
+     </item>
+    </layout>
+   </item>
+   <item row="7" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLabel" name="C_LB_2">
+       <property name="text">
+        <string>注入电流</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="C_SL_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="C_SB_2"/>
+     </item>
+    </layout>
+   </item>
+   <item row="8" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
+      <widget class="QLabel" name="C_LB_3">
+       <property name="text">
+        <string>仿真步长</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="C_SL_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="C_SB_3"/>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <widget class="QLabel" name="C_LB_4">
+       <property name="text">
+        <string>阈值</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="C_SL_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="C_SB_4"/>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
