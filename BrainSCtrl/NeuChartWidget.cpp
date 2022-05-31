@@ -33,7 +33,7 @@ void NeuChartWidget::mbrlineChart()
 {
     /* 设置坐标轴 */
     lineAxX->setRange(0, 99);           // 设置 X 轴范围
-    lineAxY->setRange(55, 75);          // 设置 Y 轴范围
+    lineAxY->setRange(-75, 75);          // 设置 Y 轴范围
     lineAxX->setLabelsVisible(false);   // 隐藏 X 轴坐标
     lineAxX->setGridLineVisible(false); // 隐藏背景网格 X 轴框线
     lineAxY->setGridLineVisible(false); // 隐藏背景网格 Y 轴框线

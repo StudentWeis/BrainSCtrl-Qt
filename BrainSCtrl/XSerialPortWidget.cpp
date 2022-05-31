@@ -98,6 +98,7 @@ void XSerialPortWidget::ASCIItoHex(char *dataASCII)
     }
     serialPort->write(dataHex);
 }
+
 /**
  * @brief 清除发送
  */
@@ -121,33 +122,34 @@ void XSerialPortWidget::on_HexDisplay_Ck_clicked()
 {
     HexDisplay = 1 - HexDisplay;
 }
+
 /**
- * @brief 读取接受缓存
+ * @brief 读取接受缓存并显示
  */
 void XSerialPortWidget::serialPortReadReady()
 {
+    // 读取接收缓存
     QByteArray readByteBuf = serialPort->readAll();
-    QString readStringBuf = QString(readByteBuf);
 
-    // Display.
+    // 显示接收到的数据
+    // 判断是否以十六进制显示
     if (HexDisplay) {
+        int countByteBuf = (int)strlen(readByteBuf.data());
         char hexBuf[1000];
-        for (int i = 0; i < (int)strlen(readByteBuf.data()); i++) {
-            sprintf(hexBuf, "%x", readByteBuf.data()[i]);
+        for (int i = 0; i < countByteBuf; i++) {
+            sprintf(hexBuf, "%02x ", readByteBuf.data()[i]);
             ui->Receieve_Ed->insertPlainText(hexBuf);
         }
     }
     else {
+        QString readStringBuf = QString(readByteBuf);
         ui->Receieve_Ed->insertPlainText(readStringBuf);
     }
 
+    // 发送接收到的数据
     float *floatBuf;
-    uint8_t buf8[4];
-    for (int i = 0; i < 4; ++i) {
-        buf8[i] = readByteBuf.data()[i];
-    }
-    floatBuf = (float *)buf8;
-    emit serial_Recive(-(*floatBuf));
+    floatBuf = (float *)readByteBuf.data();
+    emit serial_Recive(*floatBuf);
 }
 /**
  * @brief 清空接受区

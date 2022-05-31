@@ -43,7 +43,7 @@
        </item>
        <item>
         <property name="text">
-         <string>Izkvich</string>
+         <string>Izhikevich</string>
         </property>
        </item>
       </widget>
