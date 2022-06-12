@@ -10,6 +10,7 @@ BSCTMainWindow::BSCTMainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui
     XSerialPortW = new XSerialPortWidget();
 
     connect(XSerialPortW, SIGNAL(serial_Recive(double)), ui->widget, SLOT(updateMbrlineChart(double)));
+    connect(XSerialPortW, SIGNAL(serial_Recive(double)), ui->widget, SLOT(updateSpkgridChart()));
 
     connect(ui->actionsdf, SIGNAL(triggered(bool)), this, SLOT(guanyu()));
 

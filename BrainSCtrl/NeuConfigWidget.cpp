@@ -3,6 +3,7 @@
 
 #include <QPainter>
 
+int NeuCount = 0;
 
 NeuConfigWidget::NeuConfigWidget(QWidget *parent) : QWidget(parent), ui(new Ui::NeuConfigWidget)
 {
@@ -11,7 +12,7 @@ NeuConfigWidget::NeuConfigWidget(QWidget *parent) : QWidget(parent), ui(new Ui::
 
     LIF8 = (uint8_t *)&LIF;
     for (int i = 0; i < 9; ++i){
-        printf("%x ", LIF8[i]);
+        printf("%2x ", LIF8[i]);
     }
 }
 
@@ -26,7 +27,7 @@ NeuConfigWidget::~NeuConfigWidget()
 void NeuConfigWidget::on_NeuCount_SL_valueChanged(int value)
 {
     ui->NeuCount_SB->setValue(value);
-    ui->NeuWidget->NeuCount = ui->NeuCount_SB->value();
+    NeuCount = ui->NeuCount_SB->value();
     ui->NeuWidget->update();
 }
 void NeuConfigWidget::on_NeuCount_SB_valueChanged(int arg1)

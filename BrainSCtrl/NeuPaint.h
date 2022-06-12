@@ -5,6 +5,8 @@
 
 #include <QWidget>
 
+extern int NeuCount;
+
 class NeuPaint : public QWidget
 {
     Q_OBJECT
@@ -12,7 +14,7 @@ public:
     explicit NeuPaint(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
 
-    int   NeuCount = 0;
+
     float SynRatio = 0;
     char * NeuMatrix = NULL;
 

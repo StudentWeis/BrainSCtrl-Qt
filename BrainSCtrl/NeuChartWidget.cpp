@@ -1,5 +1,8 @@
 #include "NeuChartWidget.h"
 #include "ui_NeuChartWidget.h"
+#include "stdio.h"
+
+
 
 NeuChartWidget::NeuChartWidget(QWidget *parent) : QWidget(parent), ui(new Ui::NeuChartWidget)
 {
@@ -17,7 +20,6 @@ NeuChartWidget::NeuChartWidget(QWidget *parent) : QWidget(parent), ui(new Ui::Ne
     gridSeries = new QScatterSeries();
     gridAxY = new QValueAxis();
     gridAxX = new QValueAxis();
-
     spkgridChart();
 }
 
@@ -51,7 +53,7 @@ void NeuChartWidget::mbrlineChart()
     lineChart->addSeries(lineSeries);
     lineSeries->attachAxis(lineAxY);
     lineSeries->attachAxis(lineAxX);
-    lineSeries->setColor(QColor(255, 0, 0));
+    lineSeries->setColor(QColor(255, 255, 255));
 
     /* 隐藏图例说明 */
     QLegend *mlegend = lineChart->legend();
@@ -85,7 +87,7 @@ void NeuChartWidget::spkgridChart()
 {
     /* 设置坐标轴属性 */
     gridAxX->setRange(0, 99);                     // 设置 X 轴范围
-    gridAxY->setRange(0, 19);                     // 设置 Y 轴范围
+
     gridAxX->setLabelsVisible(false);             // 隐藏 X 轴坐标
     gridAxX->setGridLineVisible(false);           // 隐藏背景网格 X 轴框线
     gridAxY->setGridLineVisible(false);           // 隐藏背景网格 Y 轴框线
@@ -106,13 +108,19 @@ void NeuChartWidget::spkgridChart()
     gridSeries->attachAxis(gridAxY);
     gridSeries->setPen(QPen(Qt::NoPen)); // 画出的点不带轮廓
 
+    gridSeries->append(2, 15);
+
     /* 隐藏图例说明 */
     QLegend *mlegend = gridChart->legend();
     mlegend->setVisible(false);
 }
 
-void NeuChartWidget::updatespkgridChart()
+void NeuChartWidget::updateSpkgridChart()
 {
+    gridAxY->setRange(0, NeuCount * 8);  // 设置 Y 轴范围
+    gridSeries->append(2, NeuCount);
+
+
 }
 
 void NeuChartWidget::clearChart()

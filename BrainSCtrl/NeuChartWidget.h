@@ -8,6 +8,8 @@
 #include <QValueAxis>
 #include <QWidget>
 
+extern int NeuCount;
+
 #define POINTS_NUM_OF_MEMLINE 100 // 膜电位图表最大显示点数
 
 QT_BEGIN_NAMESPACE
@@ -41,7 +43,7 @@ class NeuChartWidget : public QWidget
 
   private slots:
     void updateMbrlineChart(double value);
-    void updatespkgridChart();
+    void updateSpkgridChart();
 
   private:
     Ui::NeuChartWidget *ui;
